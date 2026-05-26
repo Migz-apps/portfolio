@@ -109,11 +109,12 @@
   }
   .hero-glow { background-image: var(--gradient-hero); }
   .text-balance { text-wrap: balance; }
-  .fade-in-up {
-    animation: fadeInUp 0.8s ease-out both;
-  }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .fade-in-up { animation: fadeInUp 0.8s ease-out both; }
+  .fade-in { animation: fadeIn 0.25s ease-out both; }
+  .scale-in { animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+  [data-reveal].revealed { opacity: 1; transform: none; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes scaleIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
 }
