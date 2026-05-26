@@ -334,25 +334,84 @@ function ViewMediPassDropdown() {
 function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const submit = (e: React.FormEvent) => {
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorText, setErrorText] = useState("");
+
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Hello Miguel — from ${name || "a friend"}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n`);
-    window.location.href = `mailto:migzgloire@gmail.com?subject=${subject}&body=${body}`;
+
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setErrorText("Please fill out all fields.");
+      setStatus("error");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrorText("Please enter a valid email address.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("sending");
+    setErrorText("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "YOUR_WEB3FORMS_ACCESS_KEY_HERE",
+          name,
+          email,
+          message,
+        }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        setStatus("success");
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        setStatus("error");
+        setErrorText(result.message || "Was not able to send.");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("error");
+      setErrorText("Network error. Was not able to send.");
+    }
   };
+
   return (
-    <form onSubmit={submit} className="mt-10 grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
-      <input
-        type="text" required value={name} onChange={e => setName(e.target.value)} placeholder="Your name"
-        className="rounded-full border border-border bg-background/60 px-5 py-3 text-sm outline-none transition-colors focus:border-primary"
+    <form onSubmit={submit} noValidate className="mt-10 flex flex-col gap-4">
+      <div className="grid gap-3 sm:grid-cols-2">
+        <input
+          type="text" value={name} onChange={e => { setName(e.target.value); setStatus("idle"); }} placeholder="Your name"
+          className="rounded-xl border border-border bg-background/60 px-5 py-3 text-sm outline-none transition-colors focus:border-primary"
+        />
+        <input
+          type="email" value={email} onChange={e => { setEmail(e.target.value); setStatus("idle"); }} placeholder="you@email.com"
+          className="rounded-xl border border-border bg-background/60 px-5 py-3 text-sm outline-none transition-colors focus:border-primary"
+        />
+      </div>
+      <textarea
+        value={message} onChange={e => { setMessage(e.target.value); setStatus("idle"); }} placeholder="Your message" rows={4}
+        className="rounded-xl border border-border bg-background/60 px-5 py-3 text-sm outline-none transition-colors focus:border-primary resize-y min-h-[100px]"
       />
-      <input
-        type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="you@email.com"
-        className="rounded-full border border-border bg-background/60 px-5 py-3 text-sm outline-none transition-colors focus:border-primary"
-      />
-      <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90">
-        Get in touch <ArrowRight className="h-4 w-4" />
-      </button>
+
+      {status === "error" && <p className="text-sm text-red-500 font-medium px-2">{errorText}</p>}
+      {status === "success" && <p className="text-sm text-green-500 font-medium px-2">Message sent successfully! I'll get back to you soon.</p>}
+
+      <div className="flex justify-end mt-2">
+        <button type="submit" disabled={status === "sending"} className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed">
+          {status === "sending" ? "Sending..." : "Send Message"} <ArrowRight className="h-4 w-4" />
+        </button>
+      </div>
     </form>
   );
 }
