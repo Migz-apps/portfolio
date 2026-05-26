@@ -12,4 +12,7 @@ export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
   },
+  vite: {
+    base: '/portfolio/', // This configures Vite for your GitHub repository subfolder
+  },
 });
