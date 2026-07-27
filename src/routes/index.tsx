@@ -43,7 +43,22 @@ type Project = {
   wide?: boolean;
 };
 
+const skillGroups: { title: string; items: string[] }[] = [
+  { title: "Languages", items: ["JavaScript", "TypeScript", "Python", "Java", "HTML", "CSS", "SQL", "C"] },
+  { title: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Vite", "Responsive UI", "Accessibility"] },
+  { title: "Backend", items: ["Node.js", "Express", "FastAPI", "REST APIs", "WebSockets", "Authentication"] },
+  { title: "Data & AI", items: ["PostgreSQL", "MongoDB", "Supabase", "LLM integration", "Prompt engineering"] },
+  { title: "Tools & Practice", items: ["Git & GitHub", "Docker", "Linux", "CI/CD", "VS Code extensions", "Figma"] },
+];
+
 const projects: Project[] = [
+  {
+    title: "MediPass",
+    image: dashboardImg,
+    short: "A free QR code that lets patients carry their medical history on their phone, with an AI 10-second clinical summary for doctors.",
+    full: "MediPass is a free QR code that lets patients carry their medical history on their phone. When a doctor scans it, AI shows a 10-second summary of allergies, medications, and recent tests. It stops duplicate tests before they happen, saving insurance companies and patients money, and prevents medication errors. It works offline and works on basic phones through printed QR cards. Working prototype: frontend complete, backend in development.",
+    links: [{ label: "GitHub", href: "https://github.com/Migz-apps/MediPass" }],
+  },
   {
     title: "SyncScript",
     image: syncscriptImg,
@@ -67,7 +82,6 @@ const projects: Project[] = [
     short: "An AI-powered platform that matches students with complementary skills so they can build together — a gift to my high school.",
     full: "Completely built as a gift to my high school for the skills they gave me. It is an AI-powered app that matches students with complementary skills and interests but have no way of connecting because they do not know the other's interests. These work on the same projects, complementing each other. It also has a teacher section where the teacher can create their own groups based on the criteria they have set themselves to improve group collaboration. I can not give a demo to the app as it will be launched by the school next year and hosted on their local server.",
     links: [],
-    wide: true,
   },
 ];
 
@@ -159,12 +173,37 @@ function Home() {
         </div>
       </Section>
 
-      {/* OTHER PROJECTS */}
-      <Section id="projects" eyebrow="Other Projects" title="Things I've built along the way.">
+      {/* SKILLS */}
+      <Section id="skills" eyebrow="Skills" title="The tools I build with.">
+        <p className="mb-10 max-w-2xl text-balance text-lg text-muted-foreground">
+          Full stack, end to end. I write the interface, the server, and the data layer, and I keep learning whatever a problem demands.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {skillGroups.map(group => (
+            <div key={group.title} className="rounded-2xl border border-border bg-card/50 p-6 transition-colors hover:border-primary/40">
+              <h3 className="text-xs font-medium uppercase tracking-[0.18em] text-primary">{group.title}</h3>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {group.items.map(item => (
+                  <span key={item} className="rounded-full border border-border bg-secondary/40 px-3 py-1.5 text-sm text-foreground">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* PROJECTS */}
+      <Section id="projects" eyebrow="Projects" title="Things I've built along the way.">
+        <p className="mb-10 max-w-2xl text-balance text-lg text-muted-foreground">
+          Click any project to read a full summary of what it does.
+        </p>
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map(p => <ProjectCard key={p.title} project={p} />)}
         </div>
       </Section>
+
 
       {/* LINKS */}
       <Section id="links" eyebrow="Presence" title="Where to find me.">
