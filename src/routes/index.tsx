@@ -173,12 +173,37 @@ function Home() {
         </div>
       </Section>
 
-      {/* OTHER PROJECTS */}
-      <Section id="projects" eyebrow="Other Projects" title="Things I've built along the way.">
+      {/* SKILLS */}
+      <Section id="skills" eyebrow="Skills" title="The tools I build with.">
+        <p className="mb-10 max-w-2xl text-balance text-lg text-muted-foreground">
+          Full stack, end to end. I write the interface, the server, and the data layer, and I keep learning whatever a problem demands.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {skillGroups.map(group => (
+            <div key={group.title} className="rounded-2xl border border-border bg-card/50 p-6 transition-colors hover:border-primary/40">
+              <h3 className="text-xs font-medium uppercase tracking-[0.18em] text-primary">{group.title}</h3>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {group.items.map(item => (
+                  <span key={item} className="rounded-full border border-border bg-secondary/40 px-3 py-1.5 text-sm text-foreground">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* PROJECTS */}
+      <Section id="projects" eyebrow="Projects" title="Things I've built along the way.">
+        <p className="mb-10 max-w-2xl text-balance text-lg text-muted-foreground">
+          Click any project to read a full summary of what it does.
+        </p>
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map(p => <ProjectCard key={p.title} project={p} />)}
         </div>
       </Section>
+
 
       {/* LINKS */}
       <Section id="links" eyebrow="Presence" title="Where to find me.">
