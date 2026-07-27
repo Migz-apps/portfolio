@@ -43,7 +43,22 @@ type Project = {
   wide?: boolean;
 };
 
+const skillGroups: { title: string; items: string[] }[] = [
+  { title: "Languages", items: ["JavaScript", "TypeScript", "Python", "Java", "HTML", "CSS", "SQL", "C"] },
+  { title: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Vite", "Responsive UI", "Accessibility"] },
+  { title: "Backend", items: ["Node.js", "Express", "FastAPI", "REST APIs", "WebSockets", "Authentication"] },
+  { title: "Data & AI", items: ["PostgreSQL", "MongoDB", "Supabase", "LLM integration", "Prompt engineering"] },
+  { title: "Tools & Practice", items: ["Git & GitHub", "Docker", "Linux", "CI/CD", "VS Code extensions", "Figma"] },
+];
+
 const projects: Project[] = [
+  {
+    title: "MediPass",
+    image: dashboardImg,
+    short: "A free QR code that lets patients carry their medical history on their phone, with an AI 10-second clinical summary for doctors.",
+    full: "MediPass is a free QR code that lets patients carry their medical history on their phone. When a doctor scans it, AI shows a 10-second summary of allergies, medications, and recent tests. It stops duplicate tests before they happen, saving insurance companies and patients money, and prevents medication errors. It works offline and works on basic phones through printed QR cards. Working prototype: frontend complete, backend in development.",
+    links: [{ label: "GitHub", href: "https://github.com/Migz-apps/MediPass" }],
+  },
   {
     title: "SyncScript",
     image: syncscriptImg,
@@ -67,7 +82,6 @@ const projects: Project[] = [
     short: "An AI-powered platform that matches students with complementary skills so they can build together — a gift to my high school.",
     full: "Completely built as a gift to my high school for the skills they gave me. It is an AI-powered app that matches students with complementary skills and interests but have no way of connecting because they do not know the other's interests. These work on the same projects, complementing each other. It also has a teacher section where the teacher can create their own groups based on the criteria they have set themselves to improve group collaboration. I can not give a demo to the app as it will be launched by the school next year and hosted on their local server.",
     links: [],
-    wide: true,
   },
 ];
 
