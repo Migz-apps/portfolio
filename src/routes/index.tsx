@@ -1,15 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, ArrowUpRight, Github, Linkedin, Mail,
-  QrCode, Brain, ShieldAlert, Pill, WifiOff, ChevronDown, ExternalLink, X,
+  BriefcaseBusiness, ChevronDown, ExternalLink, FileText, Play, X,
 } from "lucide-react";
 import { Header } from "@/components/Header";
+import { MiqoraiDocument } from "@/components/MiqoraiDocument";
 import heroImg from "@/assets/hero-workspace.jpg";
 import aboutImg from "@/assets/about-pattern.jpg";
-import dashboardImg from "@/assets/medipass-dashboard.jpg";
-import scannerImg from "@/assets/medipass-scanner.jpg";
 import syncscriptImg from "@/assets/syncscript.png";
 import bwengeImg from "@/assets/bwenge.png";
 import matchmakerImg from "@/assets/matchmaker.jpg";
@@ -17,22 +15,14 @@ import matchmakerImg from "@/assets/matchmaker.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mazimpaka Miguel — Founder of MediPass" },
-      { name: "description", content: "Founder of MediPass — a free QR code that lets patients carry their medical history on their phone." },
-      { property: "og:title", content: "Mazimpaka Miguel — Founder of MediPass" },
-      { property: "og:description", content: "Building portable medical history for patients. Builder, developer, and curious mind." },
+      { title: "Mazimpaka Miguel — Builder of MiqorAI" },
+      { name: "description", content: "Builder of MiqorAI — an AI platform in constant, continuous improvement." },
+      { property: "og:title", content: "Mazimpaka Miguel — Builder of MiqorAI" },
+      { property: "og:description", content: "Building MiqorAI: an evolving AI platform designed for practical impact." },
     ],
   }),
   component: Home,
 });
-
-const features = [
-  { icon: QrCode, label: "QR code patient identification" },
-  { icon: Brain, label: "AI-powered 10-second clinical summary" },
-  { icon: ShieldAlert, label: "Duplicate test detection with real-time warnings" },
-  { icon: Pill, label: "Medication allergy & interaction checking" },
-  { icon: WifiOff, label: "Works offline. Works on basic phones via printed QR cards" },
-];
 
 type Project = {
   title: string;
@@ -53,17 +43,17 @@ const skillGroups: { title: string; items: string[] }[] = [
 
 const projects: Project[] = [
   {
-    title: "MediPass",
-    image: dashboardImg,
-    short: "A free QR code that lets patients carry their medical history on their phone, with an AI 10-second clinical summary for doctors.",
-    full: "MediPass is a free QR code that lets patients carry their medical history on their phone. When a doctor scans it, AI shows a 10-second summary of allergies, medications, and recent tests. It stops duplicate tests before they happen, saving insurance companies and patients money, and prevents medication errors. It works offline and works on basic phones through printed QR cards. Working prototype: frontend complete, backend in development.",
-    links: [{ label: "GitHub", href: "https://github.com/Migz-apps/MediPass" }],
+    title: "MiqorAI",
+    image: heroImg,
+    short: "An evolving AI platform focused on bringing useful AI experiences together in one place.",
+    full: "MiqorAI is an AI platform under constant and continuous improvement. It is shaped through active building, testing, feedback, and iteration, with the goal of making practical AI experiences more accessible and useful. Read the platform description for the full overview or explore the live demo.",
+    links: [{ label: "Live demo", href: "https://miqor-ai.vercel.app/" }],
   },
   {
     title: "SyncScript",
     image: syncscriptImg,
     short: "A lightweight, real-time collaboration extension for VS Code that lets developers pair-program with ultra-low latency.",
-    full: "SyncScript is a lightweight, real-time collaboration extension for VS Code that allows developers to pair-program with ultra-low latency via a self-hosted Node.js signaling backend. It optimizes enterprise-scale performance by using an event-driven file watcher, a dynamic .syncignore system, and smart binary filtering to keep synchronization seamless and lightweight. Finished developing and currently under testing. Launch is scheduled for June.",
+    full: "SyncScript is a lightweight, real-time collaboration extension for VS Code that allows developers to pair-program with ultra-low latency via a self-hosted Node.js signaling backend. It optimizes enterprise-scale performance by using an event-driven file watcher, a dynamic .syncignore system, and smart binary filtering to keep synchronization seamless and lightweight. Development is complete and the extension is currently being tested.",
     links: [{ label: "GitHub", href: "https://github.com/Migz-apps/SyncScript2.0" }],
   },
   {
@@ -87,6 +77,8 @@ const projects: Project[] = [
 
 function Home() {
   useReveal();
+  const [documentOpen, setDocumentOpen] = useState(false);
+  const [cvOpen, setCvOpen] = useState(false);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
@@ -103,26 +95,29 @@ function Home() {
         <div className="mx-auto w-full max-w-5xl px-6 fade-in-up">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            Building MediPass · Open to mentors & partners
+            Building MiqorAI · Open to mentors & partners
           </div>
           <h1 className="text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl md:text-8xl">
             Mazimpaka<br />
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Miguel</span>
           </h1>
           <p className="mt-6 max-w-2xl text-balance text-lg text-muted-foreground sm:text-xl">
-            Founder of <span className="text-foreground font-medium">MediPass</span> and full stack software developer. MediPass is a QR code that lets patients carry their medical history on their phone.
+            Builder of <span className="text-foreground font-medium">MiqorAI</span> and full stack software developer. MiqorAI is an evolving AI platform shaped through continuous improvement.
           </p>
           <p className="mt-4 max-w-2xl text-balance text-base text-muted-foreground sm:text-lg">
-            I build things that solve real problems. Right now, I am fixing healthcare data portability.
+            I build things that solve real problems, learn from feedback, and keep improving what I ship.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a href="#projects" className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all hover:gap-3 hover:opacity-90">
               See my work
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
-            <a href="#medipass" className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-6 py-3 text-sm font-medium backdrop-blur transition-colors hover:bg-card">
-              About MediPass
+            <a href="#miqorai" className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-6 py-3 text-sm font-medium backdrop-blur transition-colors hover:bg-card">
+              About MiqorAI
             </a>
+            <button onClick={() => setCvOpen(true)} className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-6 py-3 text-sm font-medium backdrop-blur transition-colors hover:bg-card">
+              View CV <BriefcaseBusiness className="h-4 w-4" />
+            </button>
           </div>
         </div>
       </section>
@@ -139,37 +134,38 @@ function Home() {
         </div>
       </Section>
 
-      {/* MEDIPASS */}
-      <Section id="medipass" eyebrow="Featured Project" title="MediPass">
+      {/* MIQORAI */}
+      <Section id="miqorai" eyebrow="Featured Project" title="MiqorAI">
         <p className="max-w-3xl text-balance text-lg text-muted-foreground">
-          A free QR code that lets patients carry their medical history on their phone. When a doctor scans it, AI shows a 10-second summary of allergies, medications, and recent tests. It stops duplicate tests before they happen, saving insurance companies and patients money, and prevents medication errors.
+          MiqorAI is an AI platform under constant and continuous improvement. It is being developed through practical experimentation, thoughtful iteration, and a focus on experiences that are genuinely useful.
         </p>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-5">
-          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-2xl md:col-span-3">
-            <img src={dashboardImg} alt="MediPass hospital dashboard — doctor view after login" loading="lazy" width={1600} height={1024} className="aspect-[16/10] w-full object-cover" />
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-card/50 p-8 shadow-2xl">
+            <FileText className="h-7 w-7 text-primary" />
+            <h3 className="mt-6 text-2xl font-semibold">Explore the platform</h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Read the complete platform description directly in this portfolio, with a focused reader built for the document.</p>
+            <button onClick={() => setDocumentOpen(true)} className="mt-6 inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary">
+              Read the document <FileText className="h-4 w-4" />
+            </button>
           </div>
-          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-2xl md:col-span-2">
-            <img src={scannerImg} alt="MediPass QR code scanner interface" loading="lazy" width={1280} height={1280} className="aspect-[16/10] w-full object-cover md:aspect-auto md:h-full" />
+          <div className="rounded-2xl border border-border bg-card/50 p-8 shadow-2xl">
+            <Play className="h-7 w-7 text-primary" />
+            <h3 className="mt-6 text-2xl font-semibold">See it in action</h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Open the live MiqorAI demo to experience the platform as it continues to grow and improve.</p>
+            <a href="https://miqor-ai.vercel.app/" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90">
+              View live demo <ExternalLink className="h-4 w-4" />
+            </a>
           </div>
-        </div>
-
-        <div className="mt-12 grid gap-3 md:grid-cols-2">
-          {features.map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-start gap-3 rounded-xl border border-border bg-card/50 p-4">
-              <div className="rounded-lg bg-primary/10 p-2 text-primary"><Icon className="h-5 w-5" /></div>
-              <span className="pt-1 text-sm text-foreground">{label}</span>
-            </div>
-          ))}
         </div>
 
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-border bg-card/50 p-6">
           <div>
             <p className="text-xs uppercase tracking-wider text-muted-foreground">Current status</p>
-            <p className="mt-1 font-medium">Working prototype · Frontend complete · Backend in development</p>
-            <p className="mt-1 text-sm text-muted-foreground">Meeting scheduled with Eden Care, a Rwandan insurance company.</p>
+            <p className="mt-1 font-medium">Live platform · Constant and continuous improvement</p>
+            <p className="mt-1 text-sm text-muted-foreground">Actively evolving through feedback, experimentation, and new releases.</p>
           </div>
-          <ViewMediPassDropdown />
+          <ViewMiqorAIDropdown onReadDocument={() => setDocumentOpen(true)} />
         </div>
       </Section>
 
@@ -212,8 +208,8 @@ function Home() {
         </p>
         <div className="flex flex-wrap gap-3">
           <SocialLink href="https://github.com/Migz-apps" icon={Github} label="GitHub" />
-          <SocialLink href="#" icon={Linkedin} label="LinkedIn" />
-          <SocialLink href="mailto:migzgloire@gmail.com" icon={Mail} label="Email" />
+          <SocialLink href="https://www.linkedin.com/in/miguel-mazimpaka/" icon={Linkedin} label="LinkedIn" />
+          <SocialLink href="mailto:mazimpakamiguel@gmail.com" icon={Mail} label="Email" />
         </div>
       </Section>
 
@@ -221,11 +217,11 @@ function Home() {
       <Section id="contact" eyebrow="Contact" title="Let's build something.">
         <div className="rounded-3xl border border-border bg-card/50 p-8 md:p-12">
           <p className="max-w-2xl text-balance text-xl text-muted-foreground md:text-2xl">
-            Building MediPass. Looking for mentors, feedback, and potential partners.
+            Building MiqorAI. Looking for mentors, feedback, and potential partners.
           </p>
-          <a href="mailto:migzgloire@gmail.com" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:opacity-90">
+          <a href="mailto:mazimpakamiguel@gmail.com" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:opacity-90">
             <Mail className="h-4 w-4" />
-            migzgloire@gmail.com
+            mazimpakamiguel@gmail.com
           </a>
           <ContactForm />
         </div>
@@ -234,6 +230,8 @@ function Home() {
       <footer className="border-t border-border py-10 text-center text-sm text-muted-foreground">
         Built by Miguel · {new Date().getFullYear()}
       </footer>
+      {documentOpen && <DocumentModal onClose={() => setDocumentOpen(false)} />}
+      {cvOpen && <CurriculumVitaeModal onClose={() => setCvOpen(false)} />}
     </div>
   );
 }
@@ -319,7 +317,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             <div className="mt-6 flex flex-wrap gap-2">
               {project.links.map(l => (
                 <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-2 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary">
-                  <Github className="h-4 w-4" /> {l.label}
+                  {l.label}
                   <ExternalLink className="h-3.5 w-3.5 opacity-60" />
                 </a>
               ))}
@@ -342,28 +340,24 @@ function SocialLink({ href, icon: Icon, label }: { href: string; icon: React.Com
   );
 }
 
-function ViewMediPassDropdown() {
+function ViewMiqorAIDropdown({ onReadDocument }: { onReadDocument: () => void }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="relative">
       <button onClick={() => setOpen(o => !o)} onBlur={() => setTimeout(() => setOpen(false), 150)} className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90">
-        View MediPass
+        View MiqorAI
         <ChevronDown className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
         <div className="absolute right-0 top-full z-20 mt-2 w-64 overflow-hidden rounded-xl border border-border bg-popover shadow-xl">
-          <a href="https://github.com/Migz-apps/MediPass" target="_blank" rel="noreferrer" className="flex items-center justify-between gap-2 px-4 py-3 text-sm transition-colors hover:bg-secondary">
-            <span className="inline-flex items-center gap-2"><Github className="h-4 w-4" /> GitHub</span>
+          <a href="https://miqor-ai.vercel.app/" target="_blank" rel="noreferrer" className="flex items-center justify-between gap-2 px-4 py-3 text-sm transition-colors hover:bg-secondary">
+            <span className="inline-flex items-center gap-2"><Play className="h-4 w-4" /> Live demo</span>
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
-          <a href="#" className="flex items-center justify-between gap-2 border-t border-border px-4 py-3 text-sm transition-colors hover:bg-secondary">
-            <span>Mobile app</span>
-            <span className="text-xs text-muted-foreground">Coming soon</span>
-          </a>
-          <a href="#" className="flex items-center justify-between gap-2 border-t border-border px-4 py-3 text-sm transition-colors hover:bg-secondary">
-            <span>Description doc</span>
-            <span className="text-xs text-muted-foreground">Coming soon</span>
-          </a>
+          <button onMouseDown={event => event.preventDefault()} onClick={onReadDocument} className="flex w-full items-center justify-between gap-2 border-t border-border px-4 py-3 text-left text-sm transition-colors hover:bg-secondary">
+            <span className="inline-flex items-center gap-2"><FileText className="h-4 w-4" /> Platform document</span>
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </button>
         </div>
       )}
     </div>
@@ -374,6 +368,7 @@ function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorText, setErrorText] = useState("");
 
@@ -394,35 +389,22 @@ function ContactForm() {
 
     setStatus("sending");
     setErrorText("");
-
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "YOUR_WEB3FORMS_ACCESS_KEY_HERE",
-          name,
-          email,
-          message,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message, website }),
       });
       const result = await response.json();
-      if (result.success) {
-        setStatus("success");
-        setName("");
-        setEmail("");
-        setMessage("");
-      } else {
-        setStatus("error");
-        setErrorText(result.message || "Was not able to send.");
-      }
+      if (!response.ok || !result.success) throw new Error(result.error || "Unable to submit the message.");
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+      setWebsite("");
     } catch (error) {
-      console.error(error);
       setStatus("error");
-      setErrorText("Network error. Was not able to send.");
+      setErrorText(error instanceof Error ? error.message : "Unable to submit the message. Please email Miguel directly.");
     }
   };
 
@@ -442,9 +424,13 @@ function ContactForm() {
         value={message} onChange={e => { setMessage(e.target.value); setStatus("idle"); }} placeholder="Your message" rows={4}
         className="rounded-xl border border-border bg-background/60 px-5 py-3 text-sm outline-none transition-colors focus:border-primary resize-y min-h-[100px]"
       />
+      <input
+        type="text" name="website" value={website} onChange={event => setWebsite(event.target.value)}
+        tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[10000px] h-px w-px opacity-0"
+      />
 
       {status === "error" && <p className="text-sm text-red-500 font-medium px-2">{errorText}</p>}
-      {status === "success" && <p className="text-sm text-green-500 font-medium px-2">Message sent successfully! I'll get back to you soon.</p>}
+      {status === "success" && <p className="text-sm text-green-500 font-medium px-2">Message sent successfully. Miguel will get back to you soon.</p>}
 
       <div className="flex justify-end mt-2">
         <button type="submit" disabled={status === "sending"} className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed">
@@ -454,3 +440,58 @@ function ContactForm() {
     </form>
   );
 }
+
+function DocumentModal({ onClose }: { onClose: () => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => event.key === "Escape" && onClose();
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 p-4 backdrop-blur-md" onClick={event => { if (event.target === ref.current) onClose(); }} ref={ref}>
+      <div className="relative flex h-[88vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
+        <div className="flex items-center justify-between border-b border-border px-5 py-4">
+          <div>
+            <p className="text-sm font-semibold">MiqorAI platform description</p>
+            <p className="text-xs text-muted-foreground">Complete platform overview</p>
+          </div>
+          <button onClick={onClose} aria-label="Close document" className="rounded-full bg-secondary p-2 transition-colors hover:bg-muted"><X className="h-4 w-4" /></button>
+        </div>
+        <div className="min-h-0 flex-1 overflow-y-auto p-5 md:p-8"><MiqoraiDocument /></div>
+      </div>
+    </div>
+  );
+}
+
+function CurriculumVitaeModal({ onClose }: { onClose: () => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => event.key === "Escape" && onClose();
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 p-4 backdrop-blur-md" onClick={event => { if (event.target === ref.current) onClose(); }} ref={ref}>
+      <div className="relative flex h-[88vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
+        <div className="flex items-center justify-between border-b border-border px-5 py-4"><div><p className="text-sm font-semibold">Curriculum Vitae</p><p className="text-xs text-muted-foreground">Mazimpaka Miguel Gloire Marie · Kigali, Rwanda</p></div><button onClick={onClose} aria-label="Close CV" className="rounded-full bg-secondary p-2 transition-colors hover:bg-muted"><X className="h-4 w-4" /></button></div>
+        <div className="min-h-0 flex-1 overflow-y-auto p-6 md:p-10">
+          <div className="rounded-2xl border border-primary/30 bg-primary/5 p-7"><h2 className="text-3xl font-bold">Mazimpaka Miguel Gloire Marie</h2><p className="mt-2 text-muted-foreground">Full stack software developer · Founder & CEO, MiqorAI</p><div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground"><a href="mailto:mazimpakamiguel@gmail.com" className="hover:text-primary">mazimpakamiguel@gmail.com</a><span>+250 790 993 822</span><a href="https://www.linkedin.com/in/miguel-mazimpaka/" target="_blank" rel="noreferrer" className="hover:text-primary">LinkedIn</a><a href="https://github.com/Migz-apps" target="_blank" rel="noreferrer" className="hover:text-primary">GitHub</a></div></div>
+          <CvSection title="Profile"><p>Full stack software developer with experience building database-driven web applications, real-time systems, and AI-powered solutions. Founder and CEO of MiqorAI, a healthcare intelligence platform focused on patient-owned medical records, healthcare interoperability, and AI-assisted clinical workflows.</p></CvSection>
+          <CvSection title="Experience"><div className="space-y-6"><CvRole title="Founder & CEO · MiqorAI" period="2026 – Present" text="Leads technical development, product planning, architecture, and implementation for a healthcare intelligence platform spanning patient management, records, AI services, audit logging, notifications, billing workflows, and secure health-data management." /><CvRole title="Software Developer · Echo Solutions" period="2025" text="Developed and maintained web applications, REST APIs, business software, data workflows, responsive interfaces, and production performance improvements with cross-functional teams." /><CvRole title="Freelance Software Developer" period="2024 – 2025" text="Built web applications and database-driven systems for clients, including responsive interfaces, backend APIs, relational schemas, deployment, maintenance, and technical support." /></div></CvSection>
+          <CvSection title="Technical strengths"><div className="flex flex-wrap gap-2">{["Java", "JavaScript / TypeScript", "Python", "PHP", "SQL & NoSQL", "React / React Native", "Angular", "Node.js", "NestJS", "Spring Boot", "Django", "FastAPI", "Docker", "Kubernetes", "AWS", "Google Cloud", "WebSockets", "Computer Vision", "Machine Learning", "System Design", "CI/CD"].map(skill => <span key={skill} className="rounded-full border border-border bg-secondary/40 px-3 py-1.5 text-sm">{skill}</span>)}</div></CvSection>
+          <CvSection title="Selected projects"><div className="grid gap-4 md:grid-cols-2"><CvProject title="SyncScript" text="Real-time collaborative development platform and Cursor extension built with TypeScript, Node.js, WebSockets, event-driven monitoring, Docker, and GitHub Actions; published on OpenVSX." /><CvProject title="School Logbook Management System" text="Digital system for school records and administrative workflows, with relational data design, backend business logic, and user-facing interfaces." /><CvProject title="Computer vision systems" text="Multi-person face tracking and recognition plus an automatic license-plate recognition system, using Python, deep learning, image processing, OCR, and structured event logging." /><CvProject title="FutureLock & Bwenge" text="Full-stack Web3 vault and marketplace, alongside AI persona-platform frontend architecture, real-time interfaces, knowledge workflows, dashboards, and multi-tenant systems." /></div></CvSection>
+          <CvSection title="Education"><p className="font-medium">Rwanda Coding Academy</p><p className="mt-1 text-sm text-muted-foreground">Software Engineering · 2023 – 2026</p><p className="mt-4 text-sm text-muted-foreground">English: Professional working proficiency · Kinyarwanda: Native proficiency · French: Professional working proficiency · Eligible for remote international opportunities.</p></CvSection>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CvSection({ title, children }: { title: string; children: React.ReactNode }) { return <section className="mt-9"><h3 className="text-xs font-medium uppercase tracking-[0.2em] text-primary">{title}</h3><div className="mt-4 leading-relaxed text-muted-foreground">{children}</div></section>; }
+function CvRole({ title, period, text }: { title: string; period: string; text: string }) { return <div><div className="flex flex-wrap items-baseline justify-between gap-2"><h4 className="font-semibold text-foreground">{title}</h4><span className="text-xs text-muted-foreground">{period}</span></div><p className="mt-2 text-sm">{text}</p></div>; }
+function CvProject({ title, text }: { title: string; text: string }) { return <div className="rounded-xl border border-border bg-card/40 p-5"><h4 className="font-semibold text-foreground">{title}</h4><p className="mt-2 text-sm">{text}</p></div>; }

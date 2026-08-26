@@ -3,7 +3,7 @@ import { ThemeToggle } from "./ThemeProvider";
 
 const links = [
   { href: "#about", label: "About" },
-  { href: "#medipass", label: "MediPass" },
+  { href: "#miqorai", label: "MiqorAI" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },
   { href: "#contact", label: "Contact" },

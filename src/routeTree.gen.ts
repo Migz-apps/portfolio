@@ -9,12 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as MedipassRouteImport } from './routes/medipass'
+import { Route as MiqoraiRouteImport } from './routes/miqorai'
 import { Route as IndexRouteImport } from './routes/index'
 
-const MedipassRoute = MedipassRouteImport.update({
-  id: '/medipass',
-  path: '/medipass',
+const MiqoraiRoute = MiqoraiRouteImport.update({
+  id: '/miqorai',
+  path: '/miqorai',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +25,37 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/medipass': typeof MedipassRoute
+  '/miqorai': typeof MiqoraiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/medipass': typeof MedipassRoute
+  '/miqorai': typeof MiqoraiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/medipass': typeof MedipassRoute
+  '/miqorai': typeof MiqoraiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/medipass'
+  fullPaths: '/' | '/miqorai'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/medipass'
-  id: '__root__' | '/' | '/medipass'
+  to: '/' | '/miqorai'
+  id: '__root__' | '/' | '/miqorai'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  MedipassRoute: typeof MedipassRoute
+  MiqoraiRoute: typeof MiqoraiRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/medipass': {
-      id: '/medipass'
-      path: '/medipass'
-      fullPath: '/medipass'
-      preLoaderRoute: typeof MedipassRouteImport
+    '/miqorai': {
+      id: '/miqorai'
+      path: '/miqorai'
+      fullPath: '/miqorai'
+      preLoaderRoute: typeof MiqoraiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +70,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  MedipassRoute: MedipassRoute,
+  MiqoraiRoute: MiqoraiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
