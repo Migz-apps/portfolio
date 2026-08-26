@@ -372,6 +372,22 @@ function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorText, setErrorText] = useState("");
 
+  const hasReachedSubmissionLimit = () => {
+    const storageKey = "portfolio-contact-submissions";
+    const now = Date.now();
+    const windowMs = 10 * 60 * 1000;
+    const maximumSubmissions = 3;
+    try {
+      const stored = JSON.parse(localStorage.getItem(storageKey) ?? "[]") as number[];
+      const recent = stored.filter(timestamp => now - timestamp < windowMs);
+      if (recent.length >= maximumSubmissions) return true;
+      localStorage.setItem(storageKey, JSON.stringify([...recent, now]));
+      return false;
+    } catch {
+      return false;
+    }
+  };
+
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -386,17 +402,26 @@ function ContactForm() {
       setStatus("error");
       return;
     }
+    if (website || hasReachedSubmissionLimit()) {
+      setErrorText("Too many messages. Please try again in 10 minutes.");
+      setStatus("error");
+      return;
+    }
 
     setStatus("sending");
     setErrorText("");
     try {
-      const response = await fetch("/api/contact", {
+      const body = `New message submitted via portfolio from "${name.trim()}":\n\n${message.trim()}\n\nSender email: ${email.trim()}`;
+      const response = await fetch("https://formsubmit.co/ajax/mazimpakamiguel@gmail.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message, website }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `New message submitted via portfolio from "${name.trim()}"`,
+          message: body,
+        }),
       });
       const result = await response.json();
-      if (!response.ok || !result.success) throw new Error(result.error || "Unable to submit the message.");
+      if (!response.ok || result.success === false) throw new Error(result.message || "Unable to submit the message.");
       setStatus("success");
       setName("");
       setEmail("");
