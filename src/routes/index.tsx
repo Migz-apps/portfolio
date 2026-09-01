@@ -15,10 +15,10 @@ import matchmakerImg from "@/assets/matchmaker.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mazimpaka Miguel — Builder of MiqorAI" },
-      { name: "description", content: "Builder of MiqorAI — an AI platform in constant, continuous improvement." },
-      { property: "og:title", content: "Mazimpaka Miguel — Builder of MiqorAI" },
-      { property: "og:description", content: "Building MiqorAI: an evolving AI platform designed for practical impact." },
+      { title: "Mazimpaka Miguel — Software Developer & Builder" },
+      { name: "description", content: "Mazimpaka Miguel is a software developer and builder creating AI-powered platforms, backend systems, developer tools, and web experiences." },
+      { property: "og:title", content: "Mazimpaka Miguel — Software Developer & Builder" },
+      { property: "og:description", content: "Explore Miguel's work across AI, backend systems, developer tools, and the web, including MiqorAI." },
     ],
   }),
   component: Home,
@@ -30,31 +30,33 @@ type Project = {
   short: string;
   full: string;
   links: { label: string; href: string }[];
+  technologies?: string[];
   wide?: boolean;
 };
 
 const skillGroups: { title: string; items: string[] }[] = [
-  { title: "Languages", items: ["JavaScript", "TypeScript", "Python", "Java", "HTML", "CSS", "SQL", "C"] },
-  { title: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Vite", "Responsive UI", "Accessibility"] },
+  { title: "Languages", items: ["JavaScript", "TypeScript", "Python", "Java", "SQL", "C"] },
+  { title: "Frontend / Web", items: ["React", "Next.js", "Tailwind CSS", "Vite", "HTML", "CSS"] },
   { title: "Backend", items: ["Node.js", "Express", "FastAPI", "REST APIs", "WebSockets", "Authentication"] },
-  { title: "Data & AI", items: ["PostgreSQL", "MongoDB", "Supabase", "LLM integration", "Prompt engineering"] },
-  { title: "Tools & Practice", items: ["Git & GitHub", "Docker", "Linux", "CI/CD", "VS Code extensions", "Figma"] },
+  { title: "Data & AI", items: ["PostgreSQL", "MongoDB", "Supabase", "LLM integration"] },
+  { title: "Engineering & Tools", items: ["Git & GitHub", "Docker", "Linux", "CI/CD", "VS Code extensions", "Figma"] },
 ];
 
 const projects: Project[] = [
   {
     title: "MiqorAI",
     image: heroImg,
-    short: "An evolving AI platform focused on bringing useful AI experiences together in one place.",
-    full: "MiqorAI is an AI platform under constant and continuous improvement. It is shaped through active building, testing, feedback, and iteration, with the goal of making practical AI experiences more accessible and useful. Read the platform description for the full overview or explore the live demo.",
+    short: "An AI-enabled digital healthcare ecosystem that connects patients, healthcare professionals, and institutions through shared information and controlled AI assistance.",
+    full: "MiqorAI is an AI-enabled digital healthcare ecosystem that connects patients, healthcare professionals, and institutions through shared healthcare information and controlled AI assistance. It addresses fragmented records and incomplete context across the healthcare journey, making information more accessible to patients and more structured for professionals. The platform is designed around patient-owned records, clinical workflows, and professional oversight, and is actively evolving through experimentation, feedback, and new releases.",
     links: [{ label: "Live demo", href: "https://miqor-ai.vercel.app/" }],
   },
   {
     title: "SyncScript",
     image: syncscriptImg,
-    short: "A lightweight, real-time collaboration extension for VS Code that lets developers pair-program with ultra-low latency.",
-    full: "SyncScript is a lightweight, real-time collaboration extension for VS Code that allows developers to pair-program with ultra-low latency via a self-hosted Node.js signaling backend. It optimizes enterprise-scale performance by using an event-driven file watcher, a dynamic .syncignore system, and smart binary filtering to keep synchronization seamless and lightweight. Development is complete and the extension is currently being tested.",
+    short: "Real-time collaborative development extension built around an event-driven architecture and lightweight self-hosted collaboration.",
+    full: "SyncScript is a real-time collaborative development extension built with TypeScript, Node.js, and WebSockets. Designed around an event-driven architecture, it uses intelligent file filtering, a dynamic .syncignore system, and smart binary filtering to keep self-hosted collaboration lightweight. Development is complete and the extension is currently being tested.",
     links: [{ label: "GitHub", href: "https://github.com/Migz-apps/SyncScript2.0" }],
+    technologies: ["TypeScript", "Node.js", "WebSockets", "Docker"],
   },
   {
     title: "Bwenge",
@@ -95,25 +97,22 @@ function Home() {
         <div className="mx-auto w-full max-w-5xl px-6 fade-in-up">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            Building MiqorAI · Open to mentors & partners
+            Software Developer · Builder · RCA Graduate
           </div>
           <h1 className="text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl md:text-8xl">
             Mazimpaka<br />
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Miguel</span>
           </h1>
           <p className="mt-6 max-w-2xl text-balance text-lg text-muted-foreground sm:text-xl">
-            Builder of <span className="text-foreground font-medium">MiqorAI</span> and full stack software developer. MiqorAI is an evolving AI platform shaped through continuous improvement.
+            Software developer building systems across AI, backend, and the web.
           </p>
           <p className="mt-4 max-w-2xl text-balance text-base text-muted-foreground sm:text-lg">
-            I build things that solve real problems, learn from feedback, and keep improving what I ship.
+            I learn by building, experimenting, and solving real problems. My work ranges from developer tools and collaborative systems to AI-powered platforms.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a href="#projects" className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all hover:gap-3 hover:opacity-90">
-              See my work
+              View my work
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <a href="#miqorai" className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-6 py-3 text-sm font-medium backdrop-blur transition-colors hover:bg-card">
-              About MiqorAI
             </a>
             <button onClick={() => setCvOpen(true)} className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-6 py-3 text-sm font-medium backdrop-blur transition-colors hover:bg-card">
               View CV <BriefcaseBusiness className="h-4 w-4" />
@@ -127,6 +126,8 @@ function Home() {
         <div className="grid items-center gap-12 md:grid-cols-[1.3fr_1fr]">
           <p className="text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
             I am someone who learns by building and understands by questioning. I move between technology, science, and real-world problems because I like seeing how different fields connect beneath the surface. I am more interested in ideas that quietly shape everyday life than things designed only to attract attention, and I spend most of my time exploring, experimenting, and creating things that make sense to me before they make sense to everyone else.
+            <br /><br />
+            As a software developer, that curiosity translates into building systems, testing ideas, and learning technologies deeply enough to understand not only how they work, but where they can be useful.
           </p>
           <div className="relative aspect-square overflow-hidden rounded-2xl border border-border">
             <img src={aboutImg} alt="Abstract network of connected nodes" loading="lazy" width={1280} height={896} className="h-full w-full object-cover" />
@@ -135,9 +136,9 @@ function Home() {
       </Section>
 
       {/* MIQORAI */}
-      <Section id="miqorai" eyebrow="Featured Project" title="MiqorAI">
+      <Section id="miqorai" eyebrow="Featured Work" title="MiqorAI">
         <p className="max-w-3xl text-balance text-lg text-muted-foreground">
-          MiqorAI is an AI platform under constant and continuous improvement. It is being developed through practical experimentation, thoughtful iteration, and a focus on experiences that are genuinely useful.
+          MiqorAI is an AI-enabled digital healthcare ecosystem connecting patients, healthcare professionals, and institutions through shared health information and controlled AI assistance. It is designed to reduce fragmented records and incomplete context across the healthcare journey, while keeping qualified professionals in control. The platform is actively evolving through practical experimentation, feedback, and new releases.
         </p>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
@@ -169,6 +170,29 @@ function Home() {
         </div>
       </Section>
 
+      {/* PROJECTS */}
+      <Section id="projects" eyebrow="Projects" title="Things I've built along the way.">
+        <p className="mb-10 max-w-2xl text-balance text-lg text-muted-foreground">
+          Click any project to read a full summary of what it does.
+        </p>
+        <div className="grid gap-6 md:grid-cols-2">
+          {projects.map(p => <ProjectCard key={p.title} project={p} />)}
+        </div>
+      </Section>
+
+      {/* EDUCATION */}
+      <Section id="education" eyebrow="Education" title="Where I learned the foundations.">
+        <div className="rounded-2xl border border-border bg-card/50 p-6 transition-colors hover:border-primary/40 md:p-8">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary">Graduate</p>
+          <h3 className="mt-3 text-2xl font-semibold">Rwanda Coding Academy</h3>
+          <p className="mt-2 font-medium text-muted-foreground">Software Programming & Embedded Systems</p>
+          <p className="mt-5 max-w-3xl leading-relaxed text-muted-foreground">Intensive technical education spanning software development, algorithms, databases, networking, embedded systems, and computer systems.</p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {["Software Engineering", "Embedded Systems", "Networking", "Databases", "Algorithms"].map(item => <span key={item} className="rounded-full border border-border bg-secondary/40 px-3 py-1.5 text-sm text-foreground">{item}</span>)}
+          </div>
+        </div>
+      </Section>
+
       {/* SKILLS */}
       <Section id="skills" eyebrow="Skills" title="The tools I build with.">
         <p className="mb-10 max-w-2xl text-balance text-lg text-muted-foreground">
@@ -190,45 +214,31 @@ function Home() {
         </div>
       </Section>
 
-      {/* PROJECTS */}
-      <Section id="projects" eyebrow="Projects" title="Things I've built along the way.">
-        <p className="mb-10 max-w-2xl text-balance text-lg text-muted-foreground">
-          Click any project to read a full summary of what it does.
-        </p>
-        <div className="grid gap-6 md:grid-cols-2">
-          {projects.map(p => <ProjectCard key={p.title} project={p} />)}
-        </div>
-      </Section>
-
-
-      {/* LINKS */}
-      <Section id="links" eyebrow="Presence" title="Where to find me.">
-        <p className="mb-8 max-w-2xl text-balance text-lg text-muted-foreground">
-          The clearest way to understand what I am building is to look at it directly. These are the places where my work, code, and conversations live.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <SocialLink href="https://github.com/Migz-apps" icon={Github} label="GitHub" />
-          <SocialLink href="https://www.linkedin.com/in/miguel-mazimpaka/" icon={Linkedin} label="LinkedIn" />
-          <SocialLink href="mailto:mazimpakamiguel@gmail.com" icon={Mail} label="Email" />
-        </div>
-      </Section>
-
       {/* CONTACT */}
       <Section id="contact" eyebrow="Contact" title="Let's build something.">
         <div className="rounded-3xl border border-border bg-card/50 p-8 md:p-12">
           <p className="max-w-2xl text-balance text-xl text-muted-foreground md:text-2xl">
-            Building MiqorAI. Looking for mentors, feedback, and potential partners.
+            I'm always interested in interesting engineering problems, opportunities to build, and conversations with people working on ambitious ideas.
+            <br /><br />
+            For opportunities, collaborations, feedback, or simply a good technical conversation, feel free to reach out.
+            <br /><br />
+            I'm also currently building MiqorAI and welcome conversations with mentors and potential partners.
           </p>
           <a href="mailto:mazimpakamiguel@gmail.com" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:opacity-90">
             <Mail className="h-4 w-4" />
             mazimpakamiguel@gmail.com
           </a>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <SocialLink href="https://github.com/Migz-apps" icon={Github} label="GitHub" />
+            <SocialLink href="https://www.linkedin.com/in/miguel-mazimpaka/" icon={Linkedin} label="LinkedIn" />
+            <SocialLink href="mailto:mazimpakamiguel@gmail.com" icon={Mail} label="Email" />
+          </div>
           <ContactForm />
         </div>
       </Section>
 
       <footer className="border-t border-border py-10 text-center text-sm text-muted-foreground">
-        Built by Miguel · {new Date().getFullYear()}
+        Built by Miguel · 2026
       </footer>
       {documentOpen && <DocumentModal onClose={() => setDocumentOpen(false)} />}
       {cvOpen && <CurriculumVitaeModal onClose={() => setCvOpen(false)} />}
@@ -283,6 +293,7 @@ function ProjectCard({ project }: { project: Project }) {
             <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
           </div>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.short}</p>
+          {project.technologies && <div className="mt-4 flex flex-wrap gap-2">{project.technologies.map(technology => <span key={technology} className="rounded-full border border-border bg-secondary/40 px-2.5 py-1 text-xs text-foreground">{technology}</span>)}</div>}
           <span className="mt-4 text-xs font-medium uppercase tracking-wider text-primary">Click to read more</span>
         </div>
       </button>
@@ -313,6 +324,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         <div className="overflow-y-auto p-8" style={{ maxHeight: "calc(88vh - 240px)" }}>
           <h3 className="text-2xl font-semibold">{project.title}</h3>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{project.full}</p>
+          {project.technologies && <div className="mt-6 flex flex-wrap gap-2">{project.technologies.map(technology => <span key={technology} className="rounded-full border border-border bg-secondary/40 px-3 py-1.5 text-sm text-foreground">{technology}</span>)}</div>}
           {project.links.length > 0 && (
             <div className="mt-6 flex flex-wrap gap-2">
               {project.links.map(l => (
